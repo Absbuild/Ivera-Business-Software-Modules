@@ -32,4 +32,45 @@ public class Connection{
             con.ShowDialog();
         }
     }
+
+    //------
+    public SqlConnection methodConnect()    
+    {
+        ficheiroTextoConexao();
+        SqlConnection conn = null;
+        try
+        {
+            conn = new SqlConnection(@"Data Source='" + nameServer.ToString() + "';Initial Catalog='" + nameDataBase + "';Integrated Security=false; User ID = " + nameUser.ToString() + "; Password = " + passwordUser.ToString());
+            conn.Open();
+            return conn;
+
+        }
+        catch (Exception e)
+        {
+
+            calert.AlertError(e.Message);
+
+        }
+        return conn;
+    }
+    //-------
+    String msg=null;
+    public void connectionTest(string server, string database, string user, string password)
+    {
+        string connectionString = @"Server=" + server+ ";Database=" +database + ";Uid=" +user + ";Password=" + password + ";";
+        try
+        {
+            SqlHelper helper = new SqlHelper(connectionString);
+            if (helper.isConnection)
+            
+            calert.AlertSuccess("Conexão efectuada com sucesso...");
+        }
+        catch (Exception ex)
+        {
+            calert.AlertError("Erro de conexão: " + ex.Message);
+            msg = "error: " + ex.Message;
+        }
+        
+    }
+    //---------
 }
