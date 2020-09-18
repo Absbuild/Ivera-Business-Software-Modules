@@ -29,6 +29,9 @@
                 mail.From = new MailAddress(sender.Trim());
                 mail.To.Add(to.Trim());
                 mail.Subject = subject.Trim();
+                
+                //Preprando o Body
+            
 
                 mail.IsBodyHtml = true;
                 mail.Body = message.Trim();
